@@ -6,6 +6,13 @@
     transform: translate(-50%, -50%);
 }
 
+#highscore {
+    font-family: "Hack";
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
 .d-none {
     display: none;
 }

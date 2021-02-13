@@ -91,15 +91,24 @@ const resetStuff = () => {
 
 const generateStuff = () => {
     if (fallingStuff.y > basket.y && fallingStuff.x >= basket.x && fallingStuff.x + fallingStuff.width <= basket.x + basket.width) {
-        console.log("yes");
         scoreBoard.score += fallingStuff.score;
         resetStuff();
     } else if (fallingStuff.y > canvas.height) {
         scoreBoard.score -= fallingStuff.score;
-        console.log("no");
         resetStuff();
     }
 };
+
+setTimeout(() => {
+    alert(`Your Score : ${scoreBoard.score}`);
+    const highscore = localStorage.getItem("highscore") ?? 0;
+    console.log(highscore)
+    console.log(scoreBoard.score)
+    if (highscore < scoreBoard.score) {
+        localStorage.setItem("highscore", scoreBoard.score);
+    }
+    location.reload();
+}, 60000)
 
 const play = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -117,5 +126,8 @@ const play = () => {
 
     requestAnimationFrame(play);
 };
+
+const highscore = document.getElementById("highscore");
+highscore.innerHTML = `High Score : ${localStorage.getItem("highscore")}`;
 
 play();
